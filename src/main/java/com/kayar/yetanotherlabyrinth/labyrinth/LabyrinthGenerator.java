@@ -213,17 +213,21 @@ public class LabyrinthGenerator {
      * Builds the 3D representation of the labyrinth.
      */
     public void build() {
+        // Calculate centered position for floor and ceiling
+        double centerX = (width - 1) * CELL_SIZE / 2.0;
+        double centerZ = (height - 1) * CELL_SIZE / 2.0;
+        
         // Create floor
         Entity floor = entityBuilder()
                 .type(FLOOR)
-                .at(-CELL_SIZE, CELL_SIZE, -CELL_SIZE)
+                .at(centerX, CELL_SIZE, centerZ)
                 .view(new Box(width * CELL_SIZE + 2 * CELL_SIZE, 0.1, height * CELL_SIZE + 2 * CELL_SIZE))
                 .buildAndAttach();
         
         // Create ceiling
         Entity ceiling = entityBuilder()
                 .type(CEILING)
-                .at(-CELL_SIZE, -WALL_HEIGHT, -CELL_SIZE)
+                .at(centerX, -WALL_HEIGHT, centerZ)
                 .view(new Box(width * CELL_SIZE + 2 * CELL_SIZE, 0.1, height * CELL_SIZE + 2 * CELL_SIZE))
                 .buildAndAttach();
         
